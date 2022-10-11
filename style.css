@@ -1,3 +1,95 @@
 #root {
   color: red;
 }
+
+body {
+  margin: 0;
+  padding: 0;
+  font-size: 1rem;
+  line-height: 1.6;
+  letter-spacing: 1px;
+  background-color: black;
+  font-family: "Roboto", sans-serif;
+}
+h1 {
+  width: 30%;
+  color: white;
+  font-size: 4.8rem;
+  font-weight: 900px;
+  text-shadow: 6px 6px 17px rgb(221, 56, 221);
+  margin-right: 3em;
+}
+
+.hero {
+  width: 100%;
+  min-height: 50vh;
+  display: flex;
+  justify-content: space-evenly;
+  background-color: black;
+}
+
+.bck-img {
+  background-image: url("../img/movieTime.png");
+  width: 400px;
+  height: 45vh;
+  background-size: contain;
+  background-repeat: no-repeat;
+  margin-left: 3em;
+  margin-top: 1em;
+  border-radius: 50%;
+}
+
+.main-grid {
+  max-width: 100%;
+  margin: 2em;
+  display: grid;
+  gap: 2em;
+  grid-template-columns: repeat(auto-fill, minmax(300px, 1fr));
+}
+
+.episode-box {
+  height: auto;
+  display: flex;
+  flex-direction: column;
+  justify-content: flex-start;
+  align-items: flex-start;
+  padding: 2em;
+  background-color: rgb(138, 208, 231);
+  border-radius: 30px;
+  border: rgb(224, 226, 233) solid 1px;
+  box-shadow: -4px 4px 15px 1px rgb(182, 102, 170);
+}
+
+.header {
+  font-size: 1.2rem;
+  font-weight: 900px;
+}
+
+.episode-image {
+  width: 100%;
+  box-shadow: -3px 3px 10px black;
+}
+
+.episode-description {
+  font-weight: bold;
+}
+
+/* footer */
+footer {
+  margin-top: 4em;
+  font-size: 1.5rem;
+  text-align: center;
+  color: #d617b0;
+  border-top: 1px solid #dee427;
+}
+.tvmaze-link {
+  text-decoration: none;
+  color: #d617b0 ;
+  cursor: pointer;
+}
+
+.tvmaze-link:hover {
+  color: #dee427;
+  font-size: 1.6rem;
+}
+
