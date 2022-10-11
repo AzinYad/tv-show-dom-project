@@ -1,6 +1,4 @@
-#root {
-  color: red;
-}
+
 
 body {
   margin: 0;
@@ -31,7 +29,7 @@ h1 {
 .bck-img {
   background-image: url("../img/movieTime.png");
   width: 400px;
-  height: 45vh;
+  height: 41vh;
   background-size: contain;
   background-repeat: no-repeat;
   margin-left: 3em;
@@ -41,11 +39,53 @@ h1 {
 
 .main-grid {
   max-width: 100%;
-  margin: 2em;
+  margin: 3.5em;
   display: grid;
   gap: 2em;
   grid-template-columns: repeat(auto-fill, minmax(300px, 1fr));
 }
+
+.movie-title {
+  text-align: center;
+  font-size: 2.2rem;
+  font-weight: bold;
+  color: white;
+}
+
+/* ==============
+search section 
+==================*/
+.search-div {
+  width: 50%;
+  margin: 1em auto;
+  display: flex;
+  justify-content: space-evenly;
+}
+
+input,
+select {
+  margin: .2em;
+  min-width: 40%;
+  height:5vh;
+  font-size: 1.3rem;
+  font-weight: 300px;
+  border-radius: 10px;
+  padding-left: 0.8em;
+}
+
+input {
+  background-image: url("https://static.thenounproject.com/png/101791-200.png");
+  background-repeat: no-repeat;
+  background-size: contain;
+  background-position: 19rem;
+}
+
+.icon-image {
+}
+
+/*============
+    episodes
+ ============ */
 
 .episode-box {
   height: auto;
@@ -65,12 +105,14 @@ h1 {
   font-weight: 900px;
 }
 
-.episode-image {
+
+.episode-img{
   width: 100%;
+  border-radius: 10px;
   box-shadow: -3px 3px 10px black;
 }
 
-.episode-description {
+.episode-summary {
   font-weight: bold;
 }
 
@@ -84,7 +126,7 @@ footer {
 }
 .tvmaze-link {
   text-decoration: none;
-  color: #d617b0 ;
+  color: #d617b0;
   cursor: pointer;
 }
 
@@ -92,4 +134,3 @@ footer {
   color: #dee427;
   font-size: 1.6rem;
 }
-
