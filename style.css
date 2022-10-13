@@ -55,6 +55,14 @@ h1 {
 /* ==============
 search section 
 ==================*/
+.is-hidden{
+  display: none;
+}
+
+.is-shown{
+  display: contents;
+}
+
 .search-div {
   width: 50%;
   margin: 1em auto;
@@ -78,9 +86,6 @@ input {
   background-repeat: no-repeat;
   background-size: contain;
   background-position: 19rem;
-}
-
-.icon-image {
 }
 
 /*============

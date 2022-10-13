@@ -1,8 +1,8 @@
 //You can edit ALL of the code here
-const rootElem = document.querySelector(".main-grid");
+let mainGridContainer = document.querySelector(".main-grid");
+const allEpisodes = getAllEpisodes();
 
 function setup() {
-  const allEpisodes = getAllEpisodes();
   makePageForEpisodes(allEpisodes);
 }
 window.onload = setup;
@@ -11,64 +11,108 @@ window.onload = setup;
 //   level100
 // =============
 
-function makePageForEpisodes(episodeList) {
-  // rootElem.textContent = `Got ${episodeList.length} episode(s)`;
-  episodeList.forEach((element) => {
-    const articleBox = document.createElement("article");
-    articleBox.className = "episode-box";
+let generateBoxId = (episode) => `article box id: ${episode.id}`;
 
-    const headerH2 = document.createElement("h2");
-    headerH2.className = "header";
-    headerH2.style.fontSize = "1.2rem";
+function makePageForEpisodes(episodeList) {
+  episodeList.forEach((episode) => {
+    let articleBox = document.createElement("article");
+    articleBox.className = "episode-box";
+    articleBox.id = generateBoxId(episode);
+
+    const episodeBoxHeader = document.createElement("h2");
+    episodeBoxHeader.className = "header";
 
     const episodeImage = document.createElement("img");
     episodeImage.className = "episode-img";
-    episodeImage.style.borderRadius = "10px";
-    episodeImage.style.boxShadow = "-3px 3px 10px black";
 
     const episodeSummary = document.createElement("p");
-    episodeImage.className = "episode-summary";
+    episodeSummary.className = "episode-summary";
 
-    articleBox.append(headerH2, episodeImage, episodeSummary);
-    rootElem.append(articleBox);
+    episodeBoxHeader.innerText =
+      episode.number >= 10
+        ? `${episode.name}-S0${episode.season}E${episode.number}`
+        : `${episode.name}-S0${episode.season}E0${episode.number}`;
 
-    headerH2.innerText =
-      element.number === 10
-        ? `${element.name}-S0${element.season}E${element.number}`
-        : `${element.name}-S0${element.season}E0${element.number}`;
-
-    episodeImage.setAttribute("src", element.image.medium);
-    episodeSummary.innerText = element.summary
+    episodeImage.setAttribute("src", episode.image.medium);
+    episodeSummary.innerText = episode.summary
       .replaceAll("<p>", "")
       .replaceAll("</p>", "")
       .replaceAll("<br>", "");
+    articleBox.append(episodeBoxHeader, episodeImage, episodeSummary);
+    if (mainGridContainer) {
+      mainGridContainer.append(articleBox);
+    }
   });
 }
 
 // ==========
 //  Level200
 // ==========
-let searchItem = () => {
-  let searchBar = document.querySelector("#search");
 
-  searchBar.addEventListener("input", (e) => {
-    let targetItem = e.target.value.toLowerCase();
+// let matchSearchText = (episode, searchTerm) => {
+//   allEpisodes.filter((episode) => {
+//     return (
+//       episode.name.includes(searchTerm) ||
+//       episode.summary.includes(searchTerm) ||
+//       episode.name.toLowerCase().includes(searchTerm) ||
+//       episode.summary.toLowerCase().includes(searchTerm)
+//     );
+//   });
+// };
 
-    let filteredEpisodes = allEpisodes.filter((episode) => {
+let search = () => {
+  let searchBar = document.getElementById("search");
+  if (!searchBar) {
+    return;
+  }
+
+  searchBar.addEventListener("input", (event) => {
+    let searchText = event.target.value;
+    if (searchText === null) return;
+
+    const filteredEpisodes = allEpisodes.filter((episode) => {
       return (
-        episode.name.includes(targetItem) ||
-        episode.summary.includes(targetItem) ||
-        episode.name.toLowerCase().includes(targetItem) ||
-        episode.summary.toLowerCase().includes(targetItem)
+        episode.name.includes(searchText) ||
+        episode.summary.includes(searchText) ||
+        episode.name.toLowerCase().includes(searchText) ||
+        episode.summary.toLowerCase().includes(searchText)
       );
     });
+    mainGridContainer.innerText = "";
+    makePageForEpisodes(filteredEpisodes);
 
-    rootElem.innerText = "";
-    console.log(rootElem);
-    filteredEpisodes.forEach((filteredEpisode) =>
-      makePageForEpisodes(filteredEpisode)
-    );
+    // let validEpisodes = allEpisodes.filter((episode) =>
+    //   matchSearchText(episode, searchText)
+    // );
+
+    // let unValidEpisodes = allEpisodes.filter(
+    //   (episode) => !matchSearchText(episode, searchText)
+    // );
+
+    // validEpisodes
+    //   .map((episode) => generateBoxId(episode))
+    //   .forEach((boxId) => {
+    //     const box = document.getElementById(boxId);
+    //     if (box === null) {
+    //       // This should not happen, it should always be an element
+    //       console.warn("could not find element using id: " + elemId);
+    //     } else {
+    //       box.classList.remove(".is-hidden");
+    //     }
+    //   });
+
+    // unValidEpisodes
+    //   .map((episode) => generateBoxId(episode))
+    //   .forEach((boxId) => {
+    //     const box = document.getElementById(boxId);
+    //     if (box === null) {
+    //       // This should not happen, it should always be an element
+    //       console.warn("could not find element using id: " + elemId);
+    //     } else {
+    //       box.classList.add(".is-hidden");
+    //     }
+    //   });
   });
 };
 
-searchItem;
+search();
