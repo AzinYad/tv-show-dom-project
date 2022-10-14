@@ -1,5 +1,3 @@
-
-
 body {
   margin: 0;
   padding: 0;
@@ -55,11 +53,11 @@ h1 {
 /* ==============
 search section 
 ==================*/
-.is-hidden{
+.is-hidden {
   display: none;
 }
 
-.is-shown{
+.is-shown {
   display: contents;
 }
 
@@ -72,9 +70,9 @@ search section
 
 input,
 select {
-  margin: .2em;
+  margin: 0.2em;
   min-width: 40%;
-  height:5vh;
+  height: 5vh;
   font-size: 1.3rem;
   border-radius: 10px;
   padding-left: 0.8em;
@@ -91,6 +89,30 @@ input {
     episodes
  ============ */
 
+/* large article box */
+.one-episode {
+  display:block;
+}
+
+.large-episode-box {
+  width:70%;
+  margin: auto;
+  padding: 2em;
+  background-color: rgb(138, 208, 231);
+  border-radius: 30px;
+  border: rgb(224, 226, 233) solid 1px;
+  box-shadow: -4px 4px 15px 1px rgb(182, 102, 170);
+}
+
+.large-episode-img{
+  width: 90%;
+  border-radius: 10px;
+  box-shadow: -3px 3px 10px black;
+}
+
+/*==============
+ grid article box 
+ ==============*/
 .episode-box {
   height: auto;
   display: flex;
@@ -109,8 +131,7 @@ input {
   font-weight: 900px;
 }
 
-
-.episode-img{
+.episode-img {
   width: 100%;
   border-radius: 10px;
   box-shadow: -3px 3px 10px black;

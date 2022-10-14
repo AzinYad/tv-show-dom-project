@@ -5,7 +5,7 @@ const allEpisodes = getAllEpisodes();
 function setup() {
   makePageForEpisodes(allEpisodes);
 }
-window.onload = setup;
+
 
 // =============
 //   level100
@@ -34,11 +34,8 @@ function makePageForEpisodes(episodeList) {
         : `${episode.name}-S0${episode.season}E0${episode.number}`;
 
     episodeImage.setAttribute("src", episode.image.medium);
-    episodeSummary.innerText = episode.summary
-      .replaceAll("<p>", "")
-      .replaceAll("</p>", "")
-      .replaceAll("<br>", "");
-
+    episodeSummary.innerHTML = episode.summary;
+    
     articleBox.append(episodeBoxHeader, episodeImage, episodeSummary);
     if (mainGridContainer) {
       mainGridContainer.append(articleBox);
@@ -149,22 +146,36 @@ const dropDown = () => {
 };
 
 const onePageEpisode = (episode) => {
-  episode.forEach((e) => {
-    const article = document.createElement("article");
-    const h2 = document.createElement("h2");
-    const img = document.createElement("img");
-    const p = document.createElement("p");
-
-    h2.innerText = `${e.name} - S0${e.season}E${
-      e.number < 10 ? "0" + e.number : e.number
-    }`;
-    img.setAttribute("src", e.image.original);
-    p.innerHTML = e.summary;
-    p.style.maxWidth = "720px";
-    img.style.maxWidth = "720px";
-    article.append(h2, img, p);
-    article.style.justifyContent = "center";
-    mainGridContainer.append(article);
+  
+   const largeArticleBox = document.createElement("article");
+   episode.forEach((episode) => {
    
+    largeArticleBox.className = "large-episode-box";
+    // largeArticleBox.id = generateBoxId(episode);
+
+    const largeBoxHeader = document.createElement("h2");
+    largeBoxHeader.className = "large-header";
+
+    const largeImage = document.createElement("img");
+    largeImage.className = "large-episode-img";
+
+    const largeSummary = document.createElement("p");
+    largeSummary.className = "large-episode-summary";
+
+    largeBoxHeader.innerText =
+      episode.number >= 10
+        ? `${episode.name}-S0${episode.season}E${episode.number}`
+        : `${episode.name}-S0${episode.season}E0${episode.number}`;
+
+    largeImage.setAttribute("src", episode.image.original);
+    largeSummary.innerHTML = episode.summary;
+
+    largeArticleBox.append(largeBoxHeader, largeImage, largeSummary);
+    if (mainGridContainer) {
+      mainGridContainer.append(largeArticleBox);
+    }
   });
 };
+
+dropDown();
+window.onload = setup;
