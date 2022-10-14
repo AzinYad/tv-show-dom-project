@@ -11,13 +11,13 @@ window.onload = setup;
 //   level100
 // =============
 
-let generateBoxId = (episode) => `article box id: ${episode.id}`;
+// let generateBoxId = (episode) => `article box id: ${episode.id}`;
 
 function makePageForEpisodes(episodeList) {
   episodeList.forEach((episode) => {
     let articleBox = document.createElement("article");
     articleBox.className = "episode-box";
-    articleBox.id = generateBoxId(episode);
+    // articleBox.id = generateBoxId(episode);
 
     const episodeBoxHeader = document.createElement("h2");
     episodeBoxHeader.className = "header";
@@ -38,6 +38,7 @@ function makePageForEpisodes(episodeList) {
       .replaceAll("<p>", "")
       .replaceAll("</p>", "")
       .replaceAll("<br>", "");
+
     articleBox.append(episodeBoxHeader, episodeImage, episodeSummary);
     if (mainGridContainer) {
       mainGridContainer.append(articleBox);
@@ -116,3 +117,54 @@ let search = () => {
 };
 
 search();
+
+// ==========
+//  Level300
+// ==========
+
+const dropDown = () => {
+  const episodeSelector = document.getElementById("episode-selector");
+
+  allEpisodes.forEach((episode) => {
+    const option = document.createElement("option");
+    option.setAttribute("value", episode.name);
+
+    option.innerText =
+      episode.number >= 10
+        ? `${episode.name}-S0${episode.season}E${episode.number}`
+        : `${episode.name}-S0${episode.season}E0${episode.number}`;
+
+    episodeSelector.append(option);
+  });
+
+  episodeSelector.addEventListener("change", (e) => {
+    mainGridContainer.innerHTML = "";
+    let selected = allEpisodes.filter(
+      (episode) => episode.name === e.target.value
+    );
+    e.target.value === "see-all"
+      ? makePageForEpisodes(allEpisodes)
+      : onePageEpisode(selected);
+  });
+};
+
+const onePageEpisode = (episode) => {
+  episode.forEach((e) => {
+    const article = document.createElement("article");
+    const h2 = document.createElement("h2");
+    const img = document.createElement("img");
+    const p = document.createElement("p");
+
+    h2.innerText = `${e.name} - S0${e.season}E${
+      e.number < 10 ? "0" + e.number : e.number
+    }`;
+    img.setAttribute("src", e.image.original);
+    p.innerHTML = e.summary;
+    p.style.maxWidth = "720px";
+    img.style.maxWidth = "720px";
+    article.append(h2, img, p);
+    article.style.justifyContent = "center";
+    mainGridContainer.append(article);
+   
+  });
+};
