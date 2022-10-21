@@ -1,5 +1,6 @@
 <!DOCTYPE html>
 <html lang="en">
+  <!-- head -->
   <head>
     <meta charset="UTF-8" />
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
@@ -18,23 +19,29 @@
     <link rel="icon" href="/favicon.ico" type="image/x-icon" />
   </head>
 
+  <!-- body -->
   <body>
-    <section class="hero">
-      <div class="bck-img"></div>
-      <h1>Tv Show Project</h1>
-      <!-- <h2> Show Time</h2> -->
-    </section>
-    <p class="movie-title">Game Of Thrones</p>
-    <section class="search-div">
-      <input id="search" type="search" placeholder="search..." />
+    <section class="wrapper">
+      <section class="hero">
+        <div class="bck-img"></div>
+        <h1>TV Show Project</h1>
+      </section>
+      <nav>
+        <section class="search-div">
+          <input
+            class="search"
+            id="search"
+            type="search"
+            placeholder="search..."
+          />
 
-      <select name="dropdown" id="episode-selector">
-        <option value="see-all">See All Episodes</option>
-      </select>
+          <select name="dropdown" id="selector">
+            <option value="see-all">See All</option>
+          </select>
+        </section>
+      </nav>
+      <main class="=main-grid" id="root"></main>
     </section>
-    <main class="main-grid" id="root">
-    </main>
-
     <!-- footer -->
     <footer>
       <p class="copy-right">
@@ -42,10 +49,8 @@
         <a class="tvmaze-link" href="https://www.tvmaze.com/"> TVMAZE</a>
       </p>
     </footer>
-
     <!-- Loads a provided function called getAllEpisodes() which returns all episodes -->
     <script src="episodes.js"></script>
-
     <!-- Loads YOUR javascript code -->
     <script src="script.js"></script>
   </body>

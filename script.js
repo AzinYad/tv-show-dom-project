@@ -1,74 +1,49 @@
-//You can edit ALL of the code here
-let mainGridContainer = document.querySelector(".main-grid");
-const allEpisodes = getAllEpisodes();
+const main = document.querySelector("main");
+const searchBar = document.querySelector("input");
+const dropDown = document.querySelector("#selector");
 
-function setup() {
-  makePageForEpisodes(allEpisodes);
-}
+function makePageForEpisodes(episodesList) {
+  episodesList.forEach((episode) => {
+    const cardBox = document.createElement("article");
+    cardBox.className = `card-box`;
+    const cardHeader = document.createElement("h2");
+    cardHeader.className = `card-header`;
+    const cardImg = document.createElement("img");
+    cardImg.className = `card-image`;
+    const cardSummary = document.createElement("p");
+    cardSummary.className = `card-summary`;
+    cardBox.append(cardHeader, cardImg, cardSummary);
+    main.append(cardBox);
 
+    episode.number > 9
+      ? (cardHeader.innerText = `${episode.name}-S0${episode.season}E${episode.number}`)
+      : (cardHeader.innerText = `${episode.name}-S0${episode.season}E0${episode.number}`);
 
-// =============
-//   level100
-// =============
-
-// let generateBoxId = (episode) => `article box id: ${episode.id}`;
-
-function makePageForEpisodes(episodeList) {
-  episodeList.forEach((episode) => {
-    let articleBox = document.createElement("article");
-    articleBox.className = "episode-box";
-    // articleBox.id = generateBoxId(episode);
-
-    const episodeBoxHeader = document.createElement("h2");
-    episodeBoxHeader.className = "header";
-
-    const episodeImage = document.createElement("img");
-    episodeImage.className = "episode-img";
-
-    const episodeSummary = document.createElement("p");
-    episodeSummary.className = "episode-summary";
-
-    episodeBoxHeader.innerText =
-      episode.number >= 10
-        ? `${episode.name}-S0${episode.season}E${episode.number}`
-        : `${episode.name}-S0${episode.season}E0${episode.number}`;
-
-    episodeImage.setAttribute("src", episode.image.medium);
-    episodeSummary.innerHTML = episode.summary;
-    
-    articleBox.append(episodeBoxHeader, episodeImage, episodeSummary);
-    if (mainGridContainer) {
-      mainGridContainer.append(articleBox);
-    }
+    cardImg.setAttribute("src", episode.image.medium);
+    cardSummary.innerHTML = episode.summary;
   });
 }
 
-// ==========
-//  Level200
-// ==========
+const fetchShowsApi = () => {
+  fetch("https://api.tvmaze.com/shows/5/episodes")
+    .then((res) => res.json())
+    .then((dataArr) => {
+      makePageForEpisodes(dataArr);
+      search(dataArr);
+      dropDownSelector(dataArr);
+    });
+};
 
-// let matchSearchText = (episode, searchTerm) => {
-//   allEpisodes.filter((episode) => {
-//     return (
-//       episode.name.includes(searchTerm) ||
-//       episode.summary.includes(searchTerm) ||
-//       episode.name.toLowerCase().includes(searchTerm) ||
-//       episode.summary.toLowerCase().includes(searchTerm)
-//     );
-//   });
-// };
+//=====
+// 200
+//=====
 
-let search = () => {
-  let searchBar = document.getElementById("search");
-  if (!searchBar) {
-    return;
-  }
-
+function search(episodes) {
   searchBar.addEventListener("input", (event) => {
-    let searchText = event.target.value;
-    if (searchText === null) return;
+    let searchText = event.target.value.toLowerCase();
+    console.log(searchText);
 
-    const filteredEpisodes = allEpisodes.filter((episode) => {
+    let filteredEpisodes = episodes.filter((episode) => {
       return (
         episode.name.includes(searchText) ||
         episode.summary.includes(searchText) ||
@@ -76,106 +51,42 @@ let search = () => {
         episode.summary.toLowerCase().includes(searchText)
       );
     });
-    mainGridContainer.innerText = "";
+    main.innerText = "";
+    if (filteredEpisodes.length === 0) {
+      const paragraph = document.createElement("p");
+      paragraph.style.color="white"
+      main.append(paragraph);
+      return (paragraph.innerText = `OOPS! There is No Result!!`);
+    }
     makePageForEpisodes(filteredEpisodes);
-
-    // let validEpisodes = allEpisodes.filter((episode) =>
-    //   matchSearchText(episode, searchText)
-    // );
-
-    // let unValidEpisodes = allEpisodes.filter(
-    //   (episode) => !matchSearchText(episode, searchText)
-    // );
-
-    // validEpisodes
-    //   .map((episode) => generateBoxId(episode))
-    //   .forEach((boxId) => {
-    //     const box = document.getElementById(boxId);
-    //     if (box === null) {
-    //       // This should not happen, it should always be an element
-    //       console.warn("could not find element using id: " + elemId);
-    //     } else {
-    //       box.classList.remove(".is-hidden");
-    //     }
-    //   });
-
-    // unValidEpisodes
-    //   .map((episode) => generateBoxId(episode))
-    //   .forEach((boxId) => {
-    //     const box = document.getElementById(boxId);
-    //     if (box === null) {
-    //       // This should not happen, it should always be an element
-    //       console.warn("could not find element using id: " + elemId);
-    //     } else {
-    //       box.classList.add(".is-hidden");
-    //     }
-    //   });
   });
-};
+}
 
-search();
+//=====
+// 300
+//=====
 
-// ==========
-//  Level300
-// ==========
-
-const dropDown = () => {
-  const episodeSelector = document.getElementById("episode-selector");
-
-  allEpisodes.forEach((episode) => {
+function dropDownSelector(episodes) {
+  episodes.forEach((episode) => {
     const option = document.createElement("option");
     option.setAttribute("value", episode.name);
-
-    option.innerText =
-      episode.number >= 10
-        ? `${episode.name}-S0${episode.season}E${episode.number}`
-        : `${episode.name}-S0${episode.season}E0${episode.number}`;
-
-    episodeSelector.append(option);
+    episode.number > 9
+      ? (option.innerText = `${episode.name} - S0${episode.season}E${episode.number}`)
+      : (option.innerText = `${episode.name} - S0${episode.season}E0${episode.number}`);
+    dropDown.append(option);
   });
+  dropDown.addEventListener("change", (event) => {
+    const targetedEpisode = event.target.value;
+    console.log(targetedEpisode);
 
-  episodeSelector.addEventListener("change", (e) => {
-    mainGridContainer.innerHTML = "";
-    let selected = allEpisodes.filter(
-      (episode) => episode.name === e.target.value
+    let selectedEpisode = episodes.filter((episode) =>
+      episode.name.includes(targetedEpisode)
     );
-    e.target.value === "see-all"
-      ? makePageForEpisodes(allEpisodes)
-      : onePageEpisode(selected);
+    main.innerText = "";
+    dropDown.value === "see-all"
+      ? makePageForEpisodes(episodes)
+      : makePageForEpisodes(selectedEpisode);
   });
-};
+}
 
-const onePageEpisode = (episode) => {
-  
-   const largeArticleBox = document.createElement("article");
-   episode.forEach((episode) => {
-   
-    largeArticleBox.className = "large-episode-box";
-    // largeArticleBox.id = generateBoxId(episode);
-
-    const largeBoxHeader = document.createElement("h2");
-    largeBoxHeader.className = "large-header";
-
-    const largeImage = document.createElement("img");
-    largeImage.className = "large-episode-img";
-
-    const largeSummary = document.createElement("p");
-    largeSummary.className = "large-episode-summary";
-
-    largeBoxHeader.innerText =
-      episode.number >= 10
-        ? `${episode.name}-S0${episode.season}E${episode.number}`
-        : `${episode.name}-S0${episode.season}E0${episode.number}`;
-
-    largeImage.setAttribute("src", episode.image.original);
-    largeSummary.innerHTML = episode.summary;
-
-    largeArticleBox.append(largeBoxHeader, largeImage, largeSummary);
-    if (mainGridContainer) {
-      mainGridContainer.append(largeArticleBox);
-    }
-  });
-};
-
-dropDown();
-window.onload = setup;
+fetchShowsApi();
