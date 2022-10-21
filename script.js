@@ -25,7 +25,7 @@ function makePageForEpisodes(episodesList) {
 }
 
 const fetchShowsApi = () => {
-  fetch("https://api.tvmaze.com/shows/5/episodes")
+  fetch("https://api.tvmaze.com/shows/205/episodes")
     .then((res) => res.json())
     .then((dataArr) => {
       makePageForEpisodes(dataArr);
