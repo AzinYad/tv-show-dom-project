@@ -1,7 +1,25 @@
 const main = document.querySelector("main");
 const searchBar = document.querySelector("input");
-const dropDown = document.querySelector("#selector");
+const episodesDropDown = document.querySelector("#episode-selector");
+const showsDropDown = document.querySelector("#show-selector");
+let allShowsName = [];
 
+const fetchShowsApi = () => {
+  fetch("https://api.tvmaze.com/shows")
+    .then((res) => res.json())
+    .then((dataArr) => {
+      allShows = dataArr;
+
+      makePageForEpisodes(dataArr);
+      search(dataArr);
+      dropDownShowSelector(dataArr);
+      dropDownEpisodeSelector(dataArr);
+    });
+};
+
+//=====
+// 100
+//=====
 function makePageForEpisodes(episodesList) {
   episodesList.forEach((episode) => {
     const cardBox = document.createElement("article");
@@ -24,16 +42,6 @@ function makePageForEpisodes(episodesList) {
   });
 }
 
-const fetchShowsApi = () => {
-  fetch("https://api.tvmaze.com/shows/205/episodes")
-    .then((res) => res.json())
-    .then((dataArr) => {
-      makePageForEpisodes(dataArr);
-      search(dataArr);
-      dropDownSelector(dataArr);
-    });
-};
-
 //=====
 // 200
 //=====
@@ -54,7 +62,7 @@ function search(episodes) {
     main.innerText = "";
     if (filteredEpisodes.length === 0) {
       const paragraph = document.createElement("p");
-      paragraph.style.color="white"
+      paragraph.style.color = "white";
       main.append(paragraph);
       return (paragraph.innerText = `OOPS! There is No Result!!`);
     }
@@ -66,16 +74,16 @@ function search(episodes) {
 // 300
 //=====
 
-function dropDownSelector(episodes) {
+function dropDownEpisodeSelector(episodes) {
   episodes.forEach((episode) => {
     const option = document.createElement("option");
     option.setAttribute("value", episode.name);
     episode.number > 9
       ? (option.innerText = `${episode.name} - S0${episode.season}E${episode.number}`)
       : (option.innerText = `${episode.name} - S0${episode.season}E0${episode.number}`);
-    dropDown.append(option);
+    episodesDropDown.append(option);
   });
-  dropDown.addEventListener("change", (event) => {
+  episodesDropDown.addEventListener("change", (event) => {
     const targetedEpisode = event.target.value;
     console.log(targetedEpisode);
 
@@ -83,9 +91,41 @@ function dropDownSelector(episodes) {
       episode.name.includes(targetedEpisode)
     );
     main.innerText = "";
-    dropDown.value === "see-all"
+    episodesDropDown.value === "see-all-episodes"
       ? makePageForEpisodes(episodes)
       : makePageForEpisodes(selectedEpisode);
+  });
+}
+
+//=====
+// 400
+//=====
+
+function dropDownShowSelector(shows) {
+  // generate an array of shows name to sort
+  shows.map((show) => {
+    allShowsName.push(show.name);
+  });
+  // sort shows name
+  let sortedNames = allShowsName.sort((a, b) =>
+    a.toLowerCase().localeCompare(b.toLowerCase())
+  );
+
+  sortedNames.forEach((showName) => {
+    const option = document.createElement("option");
+    option.setAttribute("value", showName);
+    option.innerText = showName;
+    showsDropDown.append(option);
+  });
+
+  showsDropDown.addEventListener("change", (event) => {
+    const targetedShow = event.target.value;
+
+    let selectedShow = shows.filter((show) => show.name.includes(targetedShow));
+    main.innerText = "";
+    showsDropDown.value === "see-all-shows"
+      ? makePageForShows(shows)
+      : makePageForShows(selectedShow);
   });
 }
 

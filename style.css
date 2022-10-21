@@ -4,7 +4,7 @@ body {
   font-size: 1rem;
   line-height: 1.6;
   letter-spacing: 1px;
-  background-color: black;
+  background-color: rgb(4, 4, 10);
   font-family: "Roboto", sans-serif;
 }
 .wrapper {
@@ -32,12 +32,16 @@ main {
 .hero{
   background-image: url("../img/movieTime.png");
   width:100%em;
-  height:70em;
-  background-position: center;
+  height:31em;
+  background-position: bottom;
   background-size: cover;
   background-repeat: no-repeat;
   margin:0 auto;
 
+}
+
+nav{
+  padding-top: 22em ;
 }
 
 /*==============
@@ -105,7 +109,8 @@ select {
   font-size: 1.3rem;
   border-radius: 10px;
   padding-left: 0.8em;
-  box-shadow: -4px 4px 15px 1px rgb(182, 102, 170);
+  border: 2px solid rgb(223, 202, 7);
+  box-shadow: -4px 4px 15px 1px rgb(217, 54, 193);
 }
 
 input {
@@ -139,4 +144,3 @@ footer {
    Screen 
  ========== */
 
-@media screen(min-width:);

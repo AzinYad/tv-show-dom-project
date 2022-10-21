@@ -22,21 +22,28 @@
   <!-- body -->
   <body>
     <section class="wrapper">
-      <section class="hero"></section>
-      <nav>
+      <section class="hero">
+        <nav>
         <section class="search-div">
-          <input
+         
+          <select name="show-dropdown" id="show-selector">
+            <option value="see-all-shows">See All Shows</option>
+          </select>
+
+          <select name="episode-dropdown" id="episode-selector">
+            <option value="see-all-episodes">See All Episodes</option>
+          </select>
+           <input
             class="search"
             id="search"
             type="search"
             placeholder="search..."
           />
-
-          <select name="dropdown" id="selector">
-            <option value="see-all">See All</option>
-          </select>
+          
         </section>
       </nav>
+      </section>
+      
       <main class="=main-grid" id="root"></main>
     </section>
     <!-- footer -->
