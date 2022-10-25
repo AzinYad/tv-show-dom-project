@@ -1,11 +1,10 @@
 body {
   margin: 0;
   padding: 0;
-  font-size: 1rem;
   line-height: 1.6;
   letter-spacing: 1px;
-  background-color: rgb(4, 4, 10);
-  font-family: "Roboto", sans-serif;
+  background-color: #04040a;
+  font-family: "Merriweather", serif;
 }
 .wrapper {
   max-width: 95%;
@@ -14,39 +13,114 @@ body {
 
 p {
   font-weight: bold;
-  font-size: 1.2rem;
+  font-size: 1rem;
 }
 
-main {
-  margin-top: 3em;
-  display: grid;
-  grid-template-columns: repeat(auto-fill, minmax(300px, 1fr));
-  grid-template-rows: auto;
-  gap: 2em;
-  margin: 3em;
+h3 {
+  color: #852b7e;
 }
+
 /*==============
   Hero Sec
  ==============*/
 
-.hero{
+.hero {
   background-image: url("../img/movieTime.png");
-  width:100%em;
-  height:31em;
+  width: 100%em;
+  height: 31em;
   background-position: bottom;
   background-size: cover;
   background-repeat: no-repeat;
-  margin:0 auto;
-
+  margin: 0 auto;
+  font-family: "Fuzzy Bubbles", cursive;
 }
 
-nav{
-  padding-top: 22em ;
+nav {
+  padding-top: 22em;
 }
 
+.home-btn {
+  font-size: 2.5em;
+  color: white;
+  margin: 0.4em;
+  border-radius: 5px;
+  background-color: #852b7e;
+}
 /*==============
-  Card box 
+  show box 
  ==============*/
+
+.show-section {
+  margin-top: 3em;
+  display: flex;
+  flex-direction: column;
+  gap: 3em;
+}
+
+.show-box {
+  width: 90%;
+  margin: auto;
+  height: auto;
+  display: flex;
+  justify-content: space-around;
+  color: white;
+  background-color: #0a0a21;
+  border: 2px solid white;
+  border-radius: 20px;
+  padding: 1.2em;
+  font-family: "Merriweather", serif;
+  box-shadow: -3px 3px 10px 1px rgb(182, 102, 170);
+}
+
+.show-info {
+  width: 60%;
+  display: flex;
+  flex-direction: column;
+  padding: 2em;
+  margin-left: 1em;
+}
+
+.show-header {
+  margin: 0;
+  margin-bottom: 0.5em;
+  font-weight: 900;
+  font-size: 2rem;
+  align-self: center;
+  text-shadow: 2px 2px 9px#d617b0;
+}
+
+.show-detail {
+  display: flex;
+  justify-content: space-evenly;
+  background-color: #f7d5ef;
+  border: 2px double rgb(89, 69, 123);
+  border-radius: 20px;
+  padding: 0.2em;
+}
+
+.show-summary {
+  font-size: 2rem;
+  margin: 0;
+}
+.show-img {
+  width: 17%;
+  height: 37%;
+  align-self: center;
+  border-radius: 10px;
+  border: 2px solid white;
+}
+/*==============
+  episode sec
+ ==============*/
+
+.episode-section {
+  gap: 2em;
+  margin: 3em;
+  display: grid;
+  grid-template-columns: repeat(auto-fill, minmax(300px, 1fr));
+  grid-template-rows: auto;
+}
+
 .card-box {
   height: auto;
   display: flex;
@@ -55,7 +129,7 @@ nav{
   align-items: flex-start;
   text-align: center;
   padding: 2em;
-  background-color:lightblue;
+  background-color: lightblue;
   border-radius: 30px;
   border: rgb(224, 226, 233) solid 2px;
   box-shadow: -4px 4px 15px 1px rgb(182, 102, 170);
@@ -139,8 +213,21 @@ footer {
 .tvmaze-link:hover {
   color: #dee427;
   font-size: 1.6rem;
+  text-shadow: 2px 2px 9px#d617b0;
 }
 /*=========
    Screen 
  ========== */
+@media screen and(max-width:768px) {
+  .show-screen-section{
+    gap: 2em;
+    margin: 3em;
+    display:flex;
+    flex-direction: column;
+  }
 
+  .show-screen-box{
+    display: flex;
+    flex-direction:column;
+  }
+}
