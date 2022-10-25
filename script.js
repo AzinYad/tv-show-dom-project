@@ -3,7 +3,7 @@ const searchBar = document.querySelector("input");
 const episodesDropDown = document.querySelector("#episode-selector");
 const showsDropDown = document.querySelector("#show-selector");
 const paragraph = document.createElement("p");
-const homeBtn = document.querySelector(".home-btn");
+const homeBtn = document.querySelector("#home-btn");
 let allShowsName = [];
 let showObj = [];
 let showId;
@@ -20,13 +20,8 @@ const fetchShowsApi = () => {
       makePageForShows(dataArr);
       searchShows(dataArr);
       dropDownShowSelector(dataArr);
-    });
-};
-
-let displayingEpisodes = (allEpisodes) => {
-  makePageForEpisodes(allEpisodes);
-  searchEpisodes(allEpisodes);
-  dropDownEpisodeSelector(allEpisodes);
+    })
+    .catch((error) => console.log(error));
 };
 
 //=====
@@ -61,10 +56,10 @@ function makePageForShows(allShows) {
 
     showHeader.innerText = `${show.name}`;
 
-    rated.innerText = `Rated: ${show.rating.average}`;
-    genres.innerText = `Genres: ${show.genres[0]}| ${show.genres[1]}| ${show.genres[2]}`;
-    status.innerText = `Status: ${show.status}`;
-    runTime.innerText = `Runtime: ${show.runtime}`;
+    rated.innerHTML = `<h3><strong  style="color:#0a0a21">Rated:</strong>${show.rating.average}</h3>`;
+    genres.innerHTML = `<h3><strong  style="color:#0a0a21">Genres:</strong> ${show.genres[0]}| ${show.genres[1]}| ${show.genres[2]}</h3>`;
+    status.innerHTML = `<h3><strong  style="color:#0a0a21">Status: </strong>${show.status}</h3>`;
+    runTime.innerHTML = `<h3><strong  style="color:#0a0a21">Runtime:</strong> ${show.runtime} </h3>`;
 
     showSummary.innerHTML = `${show.summary}`;
 
@@ -117,8 +112,9 @@ function searchEpisodes(allEpisodes) {
         episode.summary.toLowerCase().includes(searchText)
       );
     });
+
     main.innerText = "";
-    if (filteredEpisodes.length === 0) {
+    if (!filteredEpisodes.length) {
       paragraph.style.color = "white";
       main.append(paragraph);
       return (paragraph.innerText = `OOPS! There is No Result!!`);
@@ -142,8 +138,9 @@ function searchShows(allShows) {
         show.summary.toLowerCase().includes(searchText)
       );
     });
+
     main.innerText = "";
-    if (filteredEpisodes.length === 0) {
+    if (!filteredShows.length) {
       paragraph.style.color = "white";
       main.append(paragraph);
       return (paragraph.innerText = `OOPS! There is No Result!!`);
@@ -213,19 +210,29 @@ function dropDownShowSelector(shows) {
         ));
 
     showId = showObj[0].id;
+    console.log(showId);
 
     episodesData = fetch(`https://api.tvmaze.com/shows/${showId}/episodes`)
       .then((res) => res.json())
       .then((data) => {
         allEpisodes = data;
-        console.log(allEpisodes);
+
         makePageForEpisodes(data);
-        // showsDropDown.style.display = `none`;
+        showsDropDown.style.display = `none`;
+        searchEpisodes(data);
         dropDownEpisodeSelector(data);
-      });
+      })
+      .catch((error) => console.log(error));
   });
 }
 
 fetchShowsApi();
-displayingEpisodes();
-homeBtn.addEventListener("click", fetchShowsApi);
+
+// const home = () => {
+//   homeBtn.addEventListener("click", () => {
+//     main.innerText = "";
+//     console.log(`hi`);
+//   });
+// };
+// home();
+console.log(showId);

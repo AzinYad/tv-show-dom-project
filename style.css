@@ -45,6 +45,7 @@ nav {
   margin: 0.4em;
   border-radius: 5px;
   background-color: #852b7e;
+  cursor: pointer;
 }
 /*==============
   show box 
@@ -88,7 +89,12 @@ nav {
   align-self: center;
   text-shadow: 2px 2px 9px#d617b0;
 }
-
+ 
+.show-header:hover {
+  color: #dee427;
+  font-size: 2.1em;
+  cursor: pointer;
+}
 .show-detail {
   display: flex;
   justify-content: space-evenly;
@@ -172,7 +178,7 @@ nav {
   width: 95%;
   margin: 3em auto;
   display: flex;
-  justify-content: space-evenly;
+  justify-content: space-between;
 }
 
 input,
@@ -210,7 +216,7 @@ footer {
   cursor: pointer;
 }
 
-.tvmaze-link:hover {
+.tvmaze-link:hover{
   color: #dee427;
   font-size: 1.6rem;
   text-shadow: 2px 2px 9px#d617b0;
