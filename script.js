@@ -3,7 +3,7 @@ const searchBar = document.querySelector("input");
 const episodesDropDown = document.querySelector("#episode-selector");
 const showsDropDown = document.querySelector("#show-selector");
 const paragraph = document.createElement("p");
-const homeBtn = document.querySelector(".home-btn");
+const homeBtn = document.querySelector("#home-btn");
 let allShowsName = [];
 let showObj = [];
 let showId;
@@ -20,14 +20,11 @@ const fetchShowsApi = () => {
       makePageForShows(dataArr);
       searchShows(dataArr);
       dropDownShowSelector(dataArr);
-    });
+    })
+    .catch((error) => console.log(error));
 };
 
-let displayingEpisodes = (allEpisodes) => {
-  makePageForEpisodes(allEpisodes);
-  searchEpisodes(allEpisodes);
-  dropDownEpisodeSelector(allEpisodes);
-};
+
 
 //=====
 // 100
@@ -117,8 +114,9 @@ function searchEpisodes(allEpisodes) {
         episode.summary.toLowerCase().includes(searchText)
       );
     });
+
     main.innerText = "";
-    if (filteredEpisodes.length === 0) {
+    if (!filteredEpisodes.length) {
       paragraph.style.color = "white";
       main.append(paragraph);
       return (paragraph.innerText = `OOPS! There is No Result!!`);
@@ -142,8 +140,9 @@ function searchShows(allShows) {
         show.summary.toLowerCase().includes(searchText)
       );
     });
+
     main.innerText = "";
-    if (filteredEpisodes.length === 0) {
+    if (!filteredShows.length) {
       paragraph.style.color = "white";
       main.append(paragraph);
       return (paragraph.innerText = `OOPS! There is No Result!!`);
@@ -213,19 +212,31 @@ function dropDownShowSelector(shows) {
         ));
 
     showId = showObj[0].id;
+    console.log(showId);
 
     episodesData = fetch(`https://api.tvmaze.com/shows/${showId}/episodes`)
       .then((res) => res.json())
       .then((data) => {
+        console.log(data);
         allEpisodes = data;
-        console.log(allEpisodes);
+
         makePageForEpisodes(data);
-        // showsDropDown.style.display = `none`;
+        showsDropDown.style.display = `none`;
+        searchEpisodes(data);
         dropDownEpisodeSelector(data);
-      });
+      })
+      .catch((error) => console.log(error));
   });
 }
 
 fetchShowsApi();
-displayingEpisodes();
-homeBtn.addEventListener("click", fetchShowsApi);
+
+
+// const home = () => {
+//   homeBtn.addEventListener("click", () => {
+//     main.innerText = "";
+//     console.log(`hi`);
+//   });
+// };
+// home();
+console.log(showId);

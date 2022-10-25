@@ -172,7 +172,7 @@ nav {
   width: 95%;
   margin: 3em auto;
   display: flex;
-  justify-content: space-evenly;
+  justify-content: space-between;
 }
 
 input,
