@@ -16,10 +16,6 @@ p {
   font-size: 1rem;
 }
 
-h3 {
-  color: #852b7e;
-}
-
 /*==============
   Hero Sec
  ==============*/
@@ -89,13 +85,14 @@ nav {
   align-self: center;
   text-shadow: 2px 2px 9px#d617b0;
 }
- 
+
 .show-header:hover {
   color: #dee427;
   font-size: 2.1em;
   cursor: pointer;
 }
 .show-detail {
+  color: #852b7e;
   display: flex;
   justify-content: space-evenly;
   background-color: #f7d5ef;
@@ -216,7 +213,7 @@ footer {
   cursor: pointer;
 }
 
-.tvmaze-link:hover{
+.tvmaze-link:hover {
   color: #dee427;
   font-size: 1.6rem;
   text-shadow: 2px 2px 9px#d617b0;
@@ -225,15 +222,15 @@ footer {
    Screen 
  ========== */
 @media screen and(max-width:768px) {
-  .show-screen-section{
+  .show-screen-section {
     gap: 2em;
     margin: 3em;
-    display:flex;
+    display: flex;
     flex-direction: column;
   }
 
-  .show-screen-box{
+  .show-screen-box {
     display: flex;
-    flex-direction:column;
+    flex-direction: column;
   }
 }

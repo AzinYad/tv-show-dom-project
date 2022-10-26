@@ -43,10 +43,10 @@ function makePageForShows(allShows) {
     showDetail.className = `show-detail`;
     const showSummary = document.createElement("h2");
     showSummary.className = `show-summary`;
-    const rated = document.createElement("h3");
-    const genres = document.createElement("h3");
-    const status = document.createElement("h3");
-    const runTime = document.createElement("h3");
+    const rated = document.createElement("h4");
+    const genres = document.createElement("h4");
+    const status = document.createElement("h4");
+    const runTime = document.createElement("h4");
 
     showDetail.append(rated, genres, status, runTime);
     showInfo.append(showHeader, showSummary, showDetail);
@@ -56,10 +56,10 @@ function makePageForShows(allShows) {
 
     showHeader.innerText = `${show.name}`;
 
-    rated.innerHTML = `<h3><strong  style="color:#0a0a21">Rated:</strong>${show.rating.average}</h3>`;
-    genres.innerHTML = `<h3><strong  style="color:#0a0a21">Genres:</strong> ${show.genres[0]}| ${show.genres[1]}| ${show.genres[2]}</h3>`;
-    status.innerHTML = `<h3><strong  style="color:#0a0a21">Status: </strong>${show.status}</h3>`;
-    runTime.innerHTML = `<h3><strong  style="color:#0a0a21">Runtime:</strong> ${show.runtime} </h3>`;
+    rated.innerHTML = `<h4><strong  style="color:#0a0a21">Rated:</strong>${show.rating.average}</h4>`;
+    genres.innerHTML = `<h4><strong  style="color:#0a0a21">Genres:</strong> ${show.genres[0]}| ${show.genres[1]}| ${show.genres[2]}</h4>`;
+    status.innerHTML = `<h4><strong  style="color:#0a0a21">Status: </strong>${show.status}</h4>`;
+    runTime.innerHTML = `<h4><strong  style="color:#0a0a21">Runtime:</strong> ${show.runtime} </h4>`;
 
     showSummary.innerHTML = `${show.summary}`;
 
@@ -228,11 +228,4 @@ function dropDownShowSelector(shows) {
 
 fetchShowsApi();
 
-// const home = () => {
-//   homeBtn.addEventListener("click", () => {
-//     main.innerText = "";
-//     console.log(`hi`);
-//   });
-// };
-// home();
 console.log(showId);
