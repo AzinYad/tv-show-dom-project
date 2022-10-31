@@ -32,7 +32,7 @@ function makePageForShows(allShows) {
   showSection.classList.add("show-section", "show-screen-section");
   allShows.forEach((show) => {
     const showBox = document.createElement("article");
-    showBox.classList.add("show-box", "show-screen-box");
+    showBox.classList.add("show-box");
     const showImg = document.createElement("img");
     showImg.className = `show-img`;
     const showInfo = document.createElement("section");
@@ -69,7 +69,7 @@ function makePageForShows(allShows) {
 
 function makePageForEpisodes(allEpisodes) {
   const episodeSection = document.createElement("section");
-  episodeSection.className = `episode-section`;
+  episodeSection.classList.add("episode-section", "episode-screen-section");
 
   allEpisodes.forEach((episode) => {
     const cardBox = document.createElement("article");
@@ -228,4 +228,4 @@ function dropDownShowSelector(shows) {
 
 fetchShowsApi();
 
-console.log(showId);
+
