@@ -24,6 +24,7 @@ const fetchShowsApi = () => {
     .catch((error) => console.log(error));
 };
 
+
 //=====
 // 100
 //=====
@@ -215,6 +216,7 @@ function dropDownShowSelector(shows) {
     episodesData = fetch(`https://api.tvmaze.com/shows/${showId}/episodes`)
       .then((res) => res.json())
       .then((data) => {
+        console.log(data);
         allEpisodes = data;
 
         makePageForEpisodes(data);
