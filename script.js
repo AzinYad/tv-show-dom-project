@@ -36,8 +36,6 @@ function makePageForShows(allShows) {
     showBox.classList.add("show-box");
     const showImg = document.createElement("img");
     showImg.className = `show-img`;
-    const showInfo = document.createElement("section");
-    showInfo.className = `show-info`;
     const showHeader = document.createElement("h1");
     showHeader.className = `show-header`;
     const showDetail = document.createElement("section");
@@ -45,13 +43,16 @@ function makePageForShows(allShows) {
     const showSummary = document.createElement("h2");
     showSummary.className = `show-summary`;
     const rated = document.createElement("h4");
+    rated.classList.add("rate", "detail");
     const genres = document.createElement("h4");
+    genres.classList.add("genres", "detail");
     const status = document.createElement("h4");
+    status.classList.add("status", "detail");
     const runTime = document.createElement("h4");
+    runTime.classList.add("run-time", "detail");
 
     showDetail.append(rated, genres, status, runTime);
-    showInfo.append(showHeader, showSummary, showDetail);
-    showBox.append(showImg, showInfo);
+    showBox.append(showHeader, showImg, showSummary, showDetail);
     showSection.append(showBox);
     main.append(showSection);
 
@@ -229,5 +230,3 @@ function dropDownShowSelector(shows) {
 }
 
 fetchShowsApi();
-
-

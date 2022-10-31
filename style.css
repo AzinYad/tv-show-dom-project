@@ -59,29 +59,26 @@ nav {
 .show-box {
   width: 90%;
   margin: auto;
-  height: auto;
-  display: flex;
-  justify-content: space-around;
+  display: grid;
+  gap: 0.5em;
+  grid-template-areas:
+    "header header  header"
+    "image  summary summary"
+    "image  detail  detail";
+
+  border-radius: 20px;
+  padding: 1.2em;
   color: white;
   background-color: #0a0a21;
   border: 2px solid white;
-  border-radius: 20px;
-  padding: 1.2em;
   font-family: "Merriweather", serif;
   box-shadow: -3px 3px 10px 1px rgb(182, 102, 170);
 }
 
-.show-info {
-  width: 60%;
-  display: flex;
-  flex-direction: column;
-  padding: 2em;
-  margin-left: 1em;
-}
-
 .show-header {
+  width: 95%;
+  grid-area: header;
   margin: 0;
-  margin-bottom: 0.5em;
   font-weight: 900;
   font-size: 2rem;
   align-self: center;
@@ -94,25 +91,37 @@ nav {
   cursor: pointer;
 }
 .show-detail {
+  width: 95%;
+  grid-area: detail;
+  justify-self: end;
+  min-height: fit-content;
+  height: 3em;
   color: #852b7e;
   display: flex;
+  align-items: center;
   justify-content: space-evenly;
   background-color: #f7d5ef;
   border: 2px double rgb(89, 69, 123);
   border-radius: 20px;
-  padding: 0.2em;
+  padding: 0.6em;
+  margin: auto;
 }
 
 .show-summary {
+  width: 95%;
+  margin: auto;
   font-size: 2rem;
-  margin: 0;
+  grid-area: summary;
 }
 .show-img {
-  width: 17%;
-  height: 37%;
+  grid-area: image;
+  width: 12em;
   align-self: center;
   border-radius: 10px;
   border: 2px solid white;
+}
+.detail {
+  margin: 0.5em;
 }
 /*==============
   episode sec
@@ -196,7 +205,7 @@ input {
   background-image: url("https://static.thenounproject.com/png/101791-200.png");
   background-repeat: no-repeat;
   background-size: contain;
-  background-position:right;
+  background-position: right;
 }
 
 /*=========
@@ -223,10 +232,11 @@ footer {
 /*=========
    Screen 
  ========== */
-@media (max-width: 768px) {
 
-  .hero{
-    background-position:center;
+/* smallest screens */
+@media (max-width: 768px) {
+  .hero {
+    background-position: center;
   }
   .search-div {
     width: 95%;
@@ -279,9 +289,17 @@ footer {
     align-items: center;
   }
 
+  .show-header {
+    text-align: center;
+  }
+
   .show-img {
     width: 75%;
     margin-top: 1.5em;
+  }
+
+  .show-info {
+    width: 75%;
   }
 
   .show-detail {
@@ -289,8 +307,11 @@ footer {
     margin: 0;
   }
 
+  .show-summary {
+    margin-bottom: 0;
+  }
   .episode-screen-section {
     margin: 13em auto;
   }
-
 }
+
